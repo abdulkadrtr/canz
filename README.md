@@ -2,8 +2,7 @@
 
 **Version:** 1.0.0
 
-This repository contains the C implementation of the CANZ data compression architecture, introduced in the white paper.
-CANZ achieves compression ratios as low as 3.70% of the original data size at high block sizes (2 million messages).
+This repository contains the C implementation of the CANZ data compression architecture, as introduced in the accompanying white paper. CANZ achieves up to 96.3% size reduction — compressing data to as little as 3.70% of its original size — at block sizes of up to 2 million messages.
 
 [White Paper EN](https://github.com/user-attachments/files/28011359/white_paper_en.pdf)
 
