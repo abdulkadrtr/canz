@@ -2,7 +2,11 @@
 
 **Version:** 1.0.0
 
-This repository contains the C implementation of the CANZ data compression architecture, introduced in the [White Paper Link] white paper.
+This repository contains the C implementation of the CANZ data compression architecture, introduced in the white paper.
+
+[White Paper EN](https://github.com/user-attachments/files/28011359/white_paper_en.pdf)
+
+[White Paper TR](https://github.com/user-attachments/files/28011365/white_paper_tr.pdf)
 
 CANZ is a lossless C library that highly compresses CAN log files in candump format. It supports both file-based and real-time CAN bus usage. Please refer to the white paper for detailed performance analyses.
 
