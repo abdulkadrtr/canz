@@ -17,6 +17,7 @@ CANZ is a lossless C library that highly compresses CAN log files in candump for
 | `canz/` | Core compression algorithm implementation |
 | `canz_app/` | Contains compression and decompression application for log files. |
 | `canz_realtime/` | Contains real-time compression application that listens to CAN bus data. |
+| `helpers`| Canz schema file generator |
 
 ## CANZ Performance Analysis Summary
 
@@ -96,6 +97,8 @@ Compression parameters and runtime options are managed through the configuration
 To run compression on your own CAN data, you must first create a custom `schema.txt` file. This schema should be specifically generated according to the CAN IDs and payload structures of your dataset.
 
 For detailed information about schema generation and format, refer to the **Schema** section in the documentation.
+
+You can use the applications in the `helpers` folder to automatically generate the schema file.
 
 ---
 
@@ -225,6 +228,8 @@ vcan1
 - `[IDS]` — ID-DLC pairs in `<hex_id> <dlc>` format.
 
 Schema information is embedded into the `.canz` file during compression; no external schema is needed for decompression.
+
+You can use the applications in the helpers folder to automatically generate the schema file.
 
 ---
 
