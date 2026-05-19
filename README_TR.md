@@ -2,7 +2,11 @@
 
 **Version:** 1.0.0  
 
-Bu depo [White Paper Linki] teknik raporuyla tanıtılan canz veri sıkıştırma mimarisinin C implementasyonunu içerir.
+Bu depo teknik raporuyla tanıtılan canz veri sıkıştırma mimarisinin C implementasyonunu içerir.
+
+[Teknik Rapor EN](https://github.com/user-attachments/files/28011359/white_paper_en.pdf)
+
+[Teknik Rapor TR](https://github.com/user-attachments/files/28011365/white_paper_tr.pdf)
 
 CANZ, candump formatındaki CAN log dosyalarını yüksek oranda sıkıştıran, kayıpsız (lossless) bir C kütüphanesidir. Hem dosya tabanlı hem de gerçek zamanlı CAN hattı kullanımını destekler. Ayrıntılı performans analizleri için teknik raporu inceleyin.
 
