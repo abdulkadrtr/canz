@@ -2,7 +2,7 @@
 
 **Version:** 1.0.0  
 
-Bu depo teknik raporuyla tanıtılan canz veri sıkıştırma mimarisinin C implementasyonunu içerir.
+Bu depo, teknik belgede tanıtılan CANZ veri sıkıştırma mimarisinin C dilindeki uygulamasını içermektedir. CANZ, 2 milyon mesaja kadar blok boyutlarında %96,3'e varan boyut küçültme (veriyi orijinal boyutunun %3,70'ine kadar sıkıştırma) başarısı elde eder.
 
 [Teknik Rapor EN](https://github.com/user-attachments/files/28011359/white_paper_en.pdf)
 
