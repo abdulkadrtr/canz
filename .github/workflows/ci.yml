@@ -37,7 +37,7 @@ jobs:
 
       - name: Compress
         working-directory: canz_app
-        run: ./canz_app -c --stats 2>&1 | tee compress_stats.txt
+        run: ./canz_app canz.conf --stats 2>&1 | tee compress_stats.txt
 
       - name: Verify .canz file is non-empty
         working-directory: canz_app
@@ -51,7 +51,7 @@ jobs:
 
       - name: Decompress
         working-directory: canz_app
-        run: ./canz_app -d --stats 2>&1 | tee decompress_stats.txt
+        run: ./canz_app -d canz.conf --stats 2>&1 | tee decompress_stats.txt
 
       - name: Verify decompressed file is non-empty
         working-directory: canz_app
