@@ -24,7 +24,7 @@ jobs:
 
       - name: Build canz_app
         working-directory: canz_app
-        run: make all
+        run: make
 
       - name: Generate schema.txt from example log
         run: |
