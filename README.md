@@ -1,5 +1,7 @@
 # CANZ — CAN Log Compressor
 
+![CI](https://github.com/abdulkadrtr/canz/actions/workflows/ci.yml/badge.svg)
+
 **Version:** 1.0.0
 
 This repository contains the C implementation of the CANZ data compression architecture, as introduced in the accompanying white paper. CANZ achieves up to 96.3% size reduction — compressing data to as little as 3.70% of its original size — at block sizes of up to 2 million messages.

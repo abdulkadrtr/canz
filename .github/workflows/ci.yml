@@ -1,0 +1,92 @@
+name: CANZ Roundtrip Test
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  roundtrip:
+    name: Build & Roundtrip Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get install -y libzstd-dev
+
+      - name: Build canz library
+        working-directory: canz
+        run: make all
+
+      - name: Build canz_app
+        working-directory: canz_app
+        run: make all
+
+      - name: Generate schema.txt from example log
+        run: |
+          python3 helpers/static_file_schema_generator.py \
+            example_can_log/can_data.log \
+            0 \
+            canz_app/schema.txt
+          echo "=== Generated schema.txt ==="
+          cat canz_app/schema.txt
+
+      - name: Compress
+        working-directory: canz_app
+        run: ./canz_app -c --stats 2>&1 | tee compress_stats.txt
+
+      - name: Verify .canz file is non-empty
+        working-directory: canz_app
+        run: |
+          test -s output.canz || { echo "ERROR: output.canz missing or empty"; exit 1; }
+          ORIG=$(wc -c < ../example_can_log/can_data.log)
+          COMP=$(wc -c < output.canz)
+          echo "Original  : ${ORIG} bytes"
+          echo "Compressed: ${COMP} bytes"
+          python3 -c "print(f'Ratio     : {$ORIG/$COMP:.2f}x')"
+
+      - name: Decompress
+        working-directory: canz_app
+        run: ./canz_app -d --stats 2>&1 | tee decompress_stats.txt
+
+      - name: Verify decompressed file is non-empty
+        working-directory: canz_app
+        run: |
+          test -s decompressed.log || { echo "ERROR: decompressed.log missing or empty"; exit 1; }
+
+      - name: Lossless roundtrip check
+        working-directory: canz_app
+        run: |
+          if diff --strip-trailing-cr \
+               ../example_can_log/can_data.log \
+               decompressed.log > diff_output.txt 2>&1; then
+            echo "Roundtrip OK: files are byte-identical."
+          else
+            echo "ROUNDTRIP FAILED: files differ!"
+            echo "--- First 40 diff lines ---"
+            head -40 diff_output.txt
+            exit 1
+          fi
+
+      - name: Print stats
+        working-directory: canz_app
+        if: always()
+        run: |
+          echo "=== Compress ===" && cat compress_stats.txt || true
+          echo "=== Decompress ===" && cat decompress_stats.txt || true
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: canz-test-artifacts
+          path: |
+            canz_app/schema.txt
+            canz_app/compress_stats.txt
+            canz_app/decompress_stats.txt
+            canz_app/diff_output.txt
+          retention-days: 7
